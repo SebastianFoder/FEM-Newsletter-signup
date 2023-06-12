@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --tomato: 4, 100%, 67%;
+    --dark-slate-grey: 234, 29%, 20%;
+    --charcoal-grey: 235, 18%, 26%;
+    --grey: 231, 7%, 60%;
+    --white: 0, 0%, 100%;
+
+    --padding: 1rem;
+    --checkmark-width: 1.5rem;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    height: 100svh;
+}
+
+main{
+    position: relative;
+    width: 100%;
+    height: 100%;    
+    color: hsl(var(--dark-slate-grey));
+}
+
+main>div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(var(--white));
+}
+
+div.front{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: var(--padding);    
+    z-index: 2;
+    transform: translateY(0%);
+    transition: all 0.5s ease-in-out;
+}
+
+div.front.completed{
+    transform: translateY(-80rem);
+}
+
+div.front>*{
+    padding: 0rem var(--padding);
+}
+
+div.front::before{
+    content: '';
+    display: block;
+    background-image: url(../assets/images/illustration-sign-up-mobile.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    aspect-ratio: 375 / 284;
+}
+
+div.middle{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.middle h2{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+div.middle p{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+div.middle ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    font-size: 1.2rem;
+    gap: 1rem;
+}
+
+div.middle ul li::before{
+    content: '';
+    display: block;
+    background-image: url(../assets/images/icon-list.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--checkmark-width);
+    aspect-ratio: 1/1;
+    margin-right: 1rem;
+}
+div.middle ul li{
+    display: grid;
+    grid-template-columns: var(--checkmark-width) 1fr;
+    gap: 1rem;
+}
+
+div.front form{
+    position: relative;
+    display: grid;
+    grid-template-rows: 0.2fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    height: 10rem;
+}
+
+form label{
+    margin-bottom: -1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+form input{
+    border: 1px solid hsl(var(--grey));
+    border-radius: 0.5rem;
+    padding: 0rem 1rem;
+    font-size: 0.9rem;
+}
+
+form input.error{
+    color: hsl(var(--tomato));
+    border: 1px solid hsl(var(--tomato));
+    background-color: hsla(var(--tomato), 0.3);
+}
+
+form:has(input.error)::before{
+    content: 'Valid email required';
+    font-size: 0.8rem;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    right: var(--padding);
+    color: hsl(var(--tomato));
+}
+
+button{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--dark-slate-grey));
+    color: hsl(var(--white));
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+div.success{
+    padding: 0 var(--padding);
+}
+
+div.success button{
+    position: absolute;
+    height: 3.5rem;
+    bottom: calc(var(--padding) * 2);
+    
+    width: calc(100% - var(--padding) * 2);
+}
+
+div.success .middle{
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    gap: 1.5rem;
+    height: calc(75% - 3.5rem - var(--padding) * 2);
+}
+
+div.success .middle::before{
+    content: '';
+    display: block;
+    background-image: url(../assets/images/icon-success.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 4rem;
+    aspect-ratio: 1/1;
+    margin: 0.5rem 0rem;
+}
+
+#email{
+    font-weight: 700;
+}
+
+@media (min-width: 650px) {
+
+    :root{
+        --border-radius: 1rem;
+    }
+
+    body{
+        background-color: hsl(var(--dark-slate-grey));
+        display: grid;
+        place-items: center;
+    }
+
+    main{
+        overflow: hidden;
+        width: min(90%, 45rem);        
+        height: initial;
+        aspect-ratio: 8/6;
+        background-color: hsl(var(--white));
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        will-change: width;
+        transition: all 1s ease-in-out;
+    }
+
+    main>div{
+        border-radius: var(--border-radius);
+        width: 100%;
+        height: 100%;
+        background-color: none;
+    }
+
+    div.front{
+        position: relative;
+        display: grid;
+        gap: 2rem;
+        height: 100%;
+        padding: 0rem;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr 0.6fr;
+        grid-template-areas: 
+            "text picture"
+            "form picture";
+    }
+
+    div.middle{
+        padding-top: min(5rem, 20%);
+        font-size: 0.8rem;
+        grid-area: text;
+        height: 100%;
+    }    
+
+    div.front::before{
+        background-image: url(../assets/images/illustration-sign-up-desktop.svg);
+        grid-area: picture;
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+        border-radius: var(--border-radius);
+    }
+
+    div.middle ul li::before{
+        display: inline-block;
+        height: 100%;
+        width: initial;
+        margin-right: 0rem;
+    }
+
+    div.middle ul li{
+        display: flex;
+        align-items: center;
+        height: 1rem;
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+
+    div.middle p{
+        font-size: 1rem;
+    }
+
+
+    div.front form{
+        grid-area: form;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    div.front form>*:not(label){
+        height: min(2.5rem, 40%);
+    }
+
+    div.front form label{
+        margin: 0rem;
+    }
+
+
+    main:has(div.front.completed){
+        aspect-ratio: 1/1;
+        width: min(80%, 25rem);
+        height: initial;
+    }
+
+    div.success{
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    div.success::before{
+        content: '';
+        display: block;
+        background-image: url(../assets/images/icon-success.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 3rem;
+        aspect-ratio: 1/1;
+        margin: 0.5rem 0rem;
+    }
+
+    div.success .middle{        
+        padding: 1rem 0rem;
+        height: initial;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    div.success .middle::before{
+        display: none;
+    }
+
+    div.success button{
+        position: initial;
+        width: 100%;
+        height: 3rem;
+        transition: background 0.5s ease-in-out;
+    }
+
+    div.success button:hover {
+        background: linear-gradient(80deg, hsla(var(--tomato), 0.8) 0%, hsla(var(--tomato), 1) 100%);
+    }
+}
